@@ -15,8 +15,15 @@ const app = express();
 app.use(express.json());
 
 // Define routes
-const authRoutes = require('./routes/authRoutes');  // Assuming your route file is in the 'routes' folder
-app.use('/api', authRoutes);  // Register the auth routes with the /api prefix
+const authRoutes = require('./routes/authRoutes');
+const friendRoutes = require('./routes/friendRoutes');
+const expenseRoutes = require('./routes/expenseRoutes');
+// Assuming your route file is in the 'routes' folder
+
+app.use('/api', authRoutes);
+app.use('/api', expenseRoutes);
+app.use('/api/friends', friendRoutes);
+// Register the auth routes with the /api prefix
 
 // Default route (for testing)
 app.get('/', (req, res) => {
@@ -28,6 +35,7 @@ const PORT = process.env.PORT || 5001;
 const server = app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
 
 
 server.on('error', (err) => {
